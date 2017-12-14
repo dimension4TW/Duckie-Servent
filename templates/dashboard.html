@@ -1,11 +1,18 @@
-!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>This is Dockie-Lolita</title>
 
-</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css">
+
+{% block content%}
+<html lang="en">
+
 <body>
-    <div>Current State: {% block  state%}{% endblock %}</div>
-  
+    <div class="container" >
+      <h1 class="display-1">This is Dockie-Lolita</h1>
+      <div class="text-center">
+        <img src="http://duckietown.org/media/duckie2.png" class="rounded mx-auto d-block" style="width: 30%;">
+      </div>
+      <p class="lead">Current State: {{ state }}</p>
+  </div>
 </body>
 </html>
+{% endblock %}
