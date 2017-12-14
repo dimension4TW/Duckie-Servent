@@ -7,12 +7,27 @@
 
 <body>
     <div class="container" >
-      <h1 class="display-1">This is Dockie-Lolita</h1>
-      <div class="text-center">
-        <img src="http://duckietown.org/media/duckie2.png" class="rounded mx-auto d-block" style="width: 30%;">
+      <div class="row">
+        <div class="col col-md-4 offset-md-4 cardtext-center" style="width: 20rem; ">
+          <img class="card-img-top" src="http://duckietown.org/media/duckie2.png">
+          <div class="card-body">
+            <h4 class="card-title">Dockie Lolita</h4>
+            <p class="card-text">Current State: {{ state }}</p>
+            <p class="card-text">Current Location: {{ location }}</p>
+          </div>
+          <form action="/changeLocation" method="post">
+            <input class="btn btn-primary btn-lg btn-block" type="submit" name="location" value="Leave Home"/>
+            <input class="btn btn-primary btn-lg btn-block" type="submit" name="location" value="Room A"/>
+            <input class="btn btn-primary btn-lg btn-block" type="submit" name="location" value="Room B"/>
+            <input class="btn btn-primary btn-lg btn-block" type="submit" name="location" value="Room C"/>
+          </form>
+          <div class="card-body">
+            <a href="/display" class="card-link">Environment Data</a>
+          </div>
       </div>
-      <p class="lead">Current State: {{ state }}</p>
+    </div>
   </div>
+
 </body>
 </html>
 {% endblock %}

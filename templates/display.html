@@ -1,0 +1,40 @@
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css">
+
+{% block content%}
+<html lang="en">
+<div class="container">
+<body>
+    <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Data Type</th>
+        <th scope="col">Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Lightness</th>
+        <td>{{environment.lightness}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Temperature</th>
+        <td>{{environment.temperature}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Humidity</th>
+        <td>{{environment.humidity}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Volume</th>
+        <td>{{environment.volume}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <a href="/"> back to dashboard -></a>
+
+</div>
+</body>
+</html>
+{% endblock %}
