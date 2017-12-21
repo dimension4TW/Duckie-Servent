@@ -1,6 +1,7 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 {% block content%}
 <html lang="en">
@@ -13,9 +14,10 @@
           <div class="card-body">
             <h4 class="card-title">Dockie Lolita</h4>
             <p class="card-text">Current State: {{ state }}</p>
-            <p class="card-text">Current Location: {{ location }}</p>
+            <p class="card-text" id="currentLoc">Current Location: {{ location }}</p>
+            <p class="card-text">Current Destination: {{ destination }}</p>
           </div>
-          <form action="/changeLocation" method="post">
+          <form action="/changeDestination" method="post">
             <input class="btn btn-primary btn-lg btn-block" type="submit" name="location" value="Leave Home"/>
             <input class="btn btn-primary btn-lg btn-block" type="submit" name="location" value="Room A"/>
             <input class="btn btn-primary btn-lg btn-block" type="submit" name="location" value="Room B"/>
@@ -30,4 +32,14 @@
 
 </body>
 </html>
+
+<script>
+setInterval(function(){
+  $.get('/getCurrentLoc', function(data, status){
+          //console.log(data);
+          $('#currentLoc').text("Current Location: "+data);
+      });
+}, 5000)
+</script>
+
 {% endblock %}
