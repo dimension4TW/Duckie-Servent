@@ -3,7 +3,7 @@ from collections import deque
 
 app = Flask(__name__)
 
-state = "VEVLET"
+state = "VELVET"
 location = "Leave Home"
 environment = {
     "lightness": 0.0,
@@ -15,26 +15,39 @@ aidMapping = {
     3:"Room A",
     4:"Room B"
 }
+
 previousLoc = "Y"
 currentLoc = "Room A"
 nextLoc = "Room A"
 destLoc = "Room A"
-currentPath = deque(["A","B","C"])
+action = "STOP"
+#currentPath = deque(["A","B","C"])
 
 def mapLocation(aid):
     global aidMapping
     return aidMapping[aid]
 
-def Dika(cur,des):
-    return "X"
+def getNextLoc(cur,dest):
+    if(cur == dest):
+        return cur
+    elif(cur == "Room A"):
+        if(dest == "Room B"):
+            return "X"
+        if(dest == "Room C"):
+            return "X"
+    elif(cur == "X"):
+        if(dest == "Room B"):
+            return "Room B"
+        elif(dest == "Room C"):
+            return "Room C"
 
-def updateState():
+def update():
     global currentLoc, nextLoc, destLoc, previousLoc
-    previousLoc = currentLoc
-    currentLoc =  nextLoc
-    nextLoc = Dika(currentLoc, destLoc) #if current == destination, next = current
+    if(currentLoc != destLoc):
+        previousLoc = currentLoc
+        currentLoc =  nextLoc
 
-def gardUpdateState():
+def gardUpdate():
     global currentLoc, nextLoc, destLoc, previousLoc
     previousLoc = currentLoc
     currentLoc =  nextLoc
@@ -42,13 +55,20 @@ def gardUpdateState():
         if(currentLoc == "Room A"):
             destLoc = "Room B"
         print("You have arrived ",currentLoc, ". Now go to ",destLoc)
-    nextLoc = Dika(currentLoc, destLoc)
 
-def getNextMove(pre,cur,nxt):
-    if(cur == "X"):
+def getNextMove(pre,cur,nxt,dest):
+    if(cur == dest):
+        return "STOP"
+    elif(cur =="Room A"):
+        if(pre == "Y"):
+            if(nxt == "X"):
+                return "STRAIGHT"
+    elif(cur == "X"):
         if(pre == "Room A"):
             if(nxt == "Room B"):
                 return "LEFT"
+            elif(nxt == "Room C"):
+                return "RIGHT"
     else:
         return "STOP"
 
@@ -59,16 +79,17 @@ def dashboard():
 
 @app.route('/turn', methods=['GET'])
 def turn():
-    global nextLoc, previousLoc, state
-
-    comeFrom = previousLoc
+    global currentLoc, destLoc, nextLoc, previousLoc, state, action
+    #comeFrom = previousLoc
     if(state == "VELVET"):
-        updateState()
+        if(action != "STOP"):
+            update()
     else:
-        gardUpdateState()
-    nextMove = getNextMove(comeFrom, currentLoc, nextLoc)
-    print("Go ",nextMove,". Next Location: ",nextLoc)
-    return nextMove
+        gardUpdate()
+    nextLoc = getNextLoc(currentLoc, destLoc)
+    action = getNextMove(previousLoc, currentLoc, nextLoc, destLoc)
+    print("From ",previousLoc," Action:",action," Current Location:",currentLoc," Next Location:",nextLoc)
+    return action
 
 @app.route('/sendData', methods=['POST'])
 def send_data():
@@ -101,7 +122,7 @@ def changeDestination():
     destLoc = request.form['location']
     state = "VELVET"
     #updateState()
-    print("currentLoc: ",currentLoc, " destLoc: ",destLoc, "nextLoc: ",nextLoc)
+    print("currentLoc: ",currentLoc, " destLoc: ",destLoc)
     return render_template('dashboard.html', state=state, destination = destLoc,location=currentLoc)
 
 @app.route('/display', methods=['GET'])
