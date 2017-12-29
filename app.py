@@ -16,7 +16,7 @@ aidMapping = {
     4:"Room B"
 }
 
-previousLoc = "Room D"
+previousLoc = "Door"
 currentLoc = "Room A"
 nextLoc = "Room A"
 destLoc = "Room A"
@@ -58,11 +58,11 @@ def getNextMove(pre,cur,nxt,dest):
     if(cur == dest):
         return "STOP"
     elif(cur =="Room A"):
-        if(pre == "Z" and nxt == "Room D"):
+        if(pre == "Z" and nxt == "Door"):
             return "STRAIGHT"
-        elif(pre == "Room D" and nxt == "Z"):
+        elif(pre == "Door" and nxt == "Z"):
             return "STRAIGHT"
-        elif(pre == "Room D" and nxt == "Room D"):
+        elif(pre == "Door" and nxt == "Door"):
             return "INVERSE"
         elif(pre == "Z" and nxt == "Z"):
             return "INVERSE"
@@ -134,29 +134,29 @@ def getNextMove(pre,cur,nxt,dest):
                 return "INVERSE"
 
     elif(cur == "Y"):
-        if(pre == "Room D"):
-            if(nxt == "Room D"):
+        if(pre == "Door"):
+            if(nxt == "Door"):
                 return "INVERSE"
             elif(nxt == "X"):
                 return "LEFT"
             elif(nxt == "Z"):
                 return "STRAIGHT"
         elif(pre == "X"):
-            if(nxt == "Room D"):
+            if(nxt == "Door"):
                 return "RIGHT"
             elif(nxt == "X"):
                 return "INVERSE"
             elif(nxt == "Z"):
                 return "STRAIGHT"
         elif(pre == "Z"):
-            if(nxt == "Room D"):
+            if(nxt == "Door"):
                 return "LEFT"
-           elif(nxt == "X"):
+            elif(nxt == "X"):
                 return "STRAIGHT"
-           elif(nxt == "Z"):
+            elif(nxt == "Z"):
                 return "INVERSE"
 
-    elif(cur == "Room D"):
+    elif(cur == "Door"):
         if(pre == "Room A"):
             if(nxt == "Room A"):
                 return "INVERSE"
