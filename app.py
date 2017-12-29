@@ -109,6 +109,75 @@ def getNextMove(pre,cur,nxt,dest):
                 return "LEFT"
             elif(nxt == "Y"):
                 return "INVERSE"
+
+    elif(cur == "X"):
+        if(pre == "Room B"):
+            if(nxt == "Room B"):
+                return "INVERSE"
+            elif(nxt == "Room C"):
+                return "RIGHT"
+            elif(nxt == "Y"):
+                return "LEFT"
+        elif(pre == "Room C"):
+            if(nxt == "Room B"):
+                return "LEFT"
+            elif(nxt == "Room C"):
+                return "INVERSE"
+            elif(nxt == "Y"):
+                return "STRAIGHT"
+        elif(pre == "Y"):
+            if(nxt == "Room B"):
+                return "RIGHT"
+            elif(nxt == "Room C"):
+                return "STRAIGHT"
+            elif(nxt == "Y"):
+                return "INVERSE"
+
+    elif(cur == "Y"):
+        if(pre == "Room D"):
+            if(nxt == "Room D"):
+                return "INVERSE"
+            elif(nxt == "X"):
+                return "LEFT"
+            elif(nxt == "Z"):
+                return "STRAIGHT"
+        elif(pre == "X"):
+            if(nxt == "Room D"):
+                return "RIGHT"
+            elif(nxt == "X"):
+                return "INVERSE"
+            elif(nxt == "Z"):
+                return "STRAIGHT"
+        elif(pre == "Z"):
+            if(nxt == "Room D"):
+                return "LEFT"
+           elif(nxt == "X"):
+                return "STRAIGHT"
+           elif(nxt == "Z"):
+                return "INVERSE"
+
+    elif(cur == "Room D"):
+        if(pre == "Room A"):
+            if(nxt == "Room A"):
+                return "INVERSE"
+            elif(nxt == "Room C"):
+                return "STRAIGHT"
+            elif(nxt == "Y"):
+                return "STRAIGHT"
+        elif(pre == "Room C"):
+            if(nxt == "Room A"):
+                return "STRAIGHT"
+            elif(nxt == "Room C"):
+                return "INVERSE"
+            elif(nxt == "Y"):
+                return "LEFT"
+        elif(pre == "Y"):
+            if(nxt == "Room A"):
+                return "LEFT"
+            elif(nxt == "Room C"):
+                return "RIGHT"
+            elif(nxt == "Y"):
+                return "INVERSE"
     else:
         return "STOP"
 
