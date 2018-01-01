@@ -23,6 +23,58 @@ destLoc = "Room A"
 action = "STOP"
 #currentPath = deque(["A","B","C"])
 
+vetex= ["Room A","Room B","Room C","Room D","X","Y","Z"]
+parent= [10,10,10,10,10,10,10]
+maxint = 10000
+distance=[maxint,maxint,maxint,maxint,maxint,maxint,maxint]
+boolvertex= [False for i in range(7)]
+graph =[[0,0,0,2,0,0,1.5],
+        [0,0,0,0,1.5,0,1.5],
+        [0,0,0,2,1.5,0,0],
+        [2,0,2,0,0,1,0],
+        [0,1.5,1.5,0,0,1,0],
+        [0,0,0,1,1,0,1],
+        [1.5,1.5,0,0,0,1,0],]
+
+def defineshortest(dis, source):
+    minint = 10000
+    for i in range(7):
+        if distance[i] < minint and boolvertex[i]==False :
+          minint = distance[i]
+          minu   = i
+    return minu
+
+def dijkstra(sol,dis):
+    for i in range(7) :
+        if vetex[i] == sol:
+            source=i
+            break
+    for i in range(7) :
+        if vetex[i] == dis:
+            distination=i
+            break
+    distance[source]=0
+    parent[source]=source
+    for i in range(6):
+        use = defineshortest(distance,source)
+        print(use)
+        boolvertex[use]=True
+        for v in range(7):
+            if boolvertex[v]==False and graph[use][v]>0 and distance[v]>distance[use]+graph[use][v] :
+                 distance[v]= distance[use]+graph[use][v]
+                 parent[v]=use
+                 print(distance)
+    k=parent[distination]
+    if parent[distination] ==source:
+        return vetex[distination]
+    else:
+        while 1:
+            if parent[k]==source :
+                return vetex[k]
+                break
+            else :
+                k = parent[k]
+                                            
 def mapLocation(aid):
     global aidMapping
     return aidMapping[aid]
