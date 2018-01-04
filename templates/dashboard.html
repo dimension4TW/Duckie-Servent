@@ -17,6 +17,9 @@
             <p class="card-text" id="currentLoc">Current Location: {{ location }}</p>
             <p class="card-text">Current Destination: {{ destination }}</p>
           </div>
+          <form action="/changeState" method="post">
+            <input class="btn btn-warning btn-lg btn-block" type="submit" name="state" value="GUARD"/>
+          </form>
           <form action="/changeDestination" method="post">
             <input class="btn btn-primary btn-lg btn-block" type="submit" name="location" value="Door"/>
             <input class="btn btn-primary btn-lg btn-block" type="submit" name="location" value="Room A"/>

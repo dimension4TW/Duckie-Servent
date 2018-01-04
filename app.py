@@ -96,6 +96,12 @@ def gardUpdate():
     if(currentLoc == destLoc):
         if(currentLoc == "Room A"):
             destLoc = "Room B"
+        elif(currentLoc == "Room B"):
+            destLoc = "Room C"
+        elif(currentLoc == "Room C"):
+            destLoc = "Door"
+        elif(currentLoc == "Door"):
+            destLoc = "Room A"
         print("You have arrived ",currentLoc, ". Now go to ",destLoc)
 
 def getNextMove(pre,cur,nxt,dest):
@@ -240,7 +246,17 @@ def turn():
         else:
             print("Now Stop")
     else:
-        gardUpdate()
+        if(action != "STOP"):
+            gardUpdate()
+        else:
+            if currentLoc == "Room A":
+                destLoc = "Room B"
+            elif currentLoc == "Room B":
+                destLoc = "Room C"
+            elif currentLoc == "Room C":
+                destLoc = "Door"
+            elif currentLoc == "Door":
+                destLoc = "Room A"        
     nextLoc = getNextLoc(currentLoc, destLoc)
     print("NextLoc: ",nextLoc)
     action = getNextMove(previousLoc, currentLoc, nextLoc, destLoc)
@@ -270,7 +286,7 @@ def changeState():
     global state
     state = request.form['state']
     print(state)
-    return state
+    return render_template('dashboard.html', state=state, destination = destLoc,location=currentLoc)
 
 @app.route('/changeDestination', methods=['POST'])
 def changeDestination():
