@@ -11,10 +11,6 @@ environment = {
     "humidity":0.0,
     "volume":0.0
 }
-aidMapping = {
-    3:"Room A",
-    4:"Room B"
-}
 
 previousLoc = "Door"
 currentLoc = "Room A"
@@ -23,7 +19,7 @@ destLoc = "Room A"
 action = "STOP"
 #currentPath = deque(["A","B","C"])
 
-vetex= ["Room A","Room B","Room C","Room D","X","Y","Z"]
+vetex= ["Room A","Room B","Room C","Door","X","Y","Z"]
 parent= [10,10,10,10,10,10,10]
 maxint = 10000
 distance=[maxint,maxint,maxint,maxint,maxint,maxint,maxint]
@@ -37,6 +33,8 @@ graph =[[0,0,0,2,0,0,1.5],
         [1.5,1.5,0,0,0,1,0],]
 
 def defineshortest(dis, source):
+    global boolvertex, distance
+    minu = 8
     minint = 10000
     for i in range(7):
         if distance[i] < minint and boolvertex[i]==False :
@@ -44,7 +42,14 @@ def defineshortest(dis, source):
           minu   = i
     return minu
 
-def dijkstra(sol,dis):
+def getNextLoc(sol,dis):
+    print("Now calculating nextLoc")
+    global vetex, parent, distance, boolvertex, graph, maxint
+    for i in range(7):
+        boolvertex[i] = False
+        distance[i] = maxint
+    distination = 0
+    use = 8
     for i in range(7) :
         if vetex[i] == sol:
             source=i
@@ -57,39 +62,26 @@ def dijkstra(sol,dis):
     parent[source]=source
     for i in range(6):
         use = defineshortest(distance,source)
-        print(use)
+        print("user: ",use)
         boolvertex[use]=True
         for v in range(7):
             if boolvertex[v]==False and graph[use][v]>0 and distance[v]>distance[use]+graph[use][v] :
                  distance[v]= distance[use]+graph[use][v]
                  parent[v]=use
-                 print(distance)
-    k=parent[distination]
+                 #print(distance)
+    k = parent[distination]
     if parent[distination] ==source:
+        print(vetex[distination])
         return vetex[distination]
     else:
         while 1:
+            print("Parent: ",parent[k])
             if parent[k]==source :
+                print(vetex[k])
                 return vetex[k]
                 break
             else :
                 k = parent[k]
-                                            
-def mapLocation(aid):
-    global aidMapping
-    return aidMapping[aid]
-
-def getNextLoc(cur,dest):
-    if(cur == dest):
-        return cur
-    elif(cur == "Room A"):
-        if(dest == "Room B"):
-            return "Z"
-        if(dest == "Room C"):
-            return "Z"
-    elif(cur == "Z"):
-        if(dest == "Room B"):
-            return "Room B"
 
 def update():
     global currentLoc, nextLoc, destLoc, previousLoc
@@ -130,13 +122,13 @@ def getNextMove(pre,cur,nxt,dest):
             return "INVERSE"
 
     elif(cur =="Room C"):
-        if(pre == "X" and nxt == "D"):
+        if(pre == "X" and nxt == "Door"):
             return "STRAIGHT"
-        elif(pre == "D" and nxt == "X"):
+        elif(pre == "Door" and nxt == "X"):
             return "STRAIGHT"
         elif(pre == "X" and nxt == "X"):
             return "INVERSE"
-        elif(pre == "D" and nxt == "D"):
+        elif(pre == "Door" and nxt == "Door"):
             return "INVERSE"
 
     elif(cur == "Z"):
@@ -245,9 +237,12 @@ def turn():
     if(state == "VELVET"):
         if(action != "STOP"):
             update()
+        else:
+            print("Now Stop")
     else:
         gardUpdate()
     nextLoc = getNextLoc(currentLoc, destLoc)
+    print("NextLoc: ",nextLoc)
     action = getNextMove(previousLoc, currentLoc, nextLoc, destLoc)
     print("From ",previousLoc," Action:",action," Current Location:",currentLoc," Next Location:",nextLoc)
     return action
