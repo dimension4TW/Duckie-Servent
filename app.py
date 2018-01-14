@@ -252,7 +252,7 @@ def reset():
 def turn():
     global currentLoc, destLoc, nextLoc, previousLoc, state, action
     #comeFrom = previousLoc
-    if(state == "VELVET"):
+    if(state != "GUARD"):
         if(action != "STOP"):
             update()
         else:
@@ -277,10 +277,22 @@ def turn():
 
 @app.route('/sendData', methods=['POST'])
 def send_data():
+    global environment
     if request.method == 'POST':
-        data = request.form['test']
-        print(data)
+        environment.lightness = request.form['light']
+        environment.temperature = request.form['temperature']
+        environment.humidity = request.form['humidity']
+        environment.volume = request.form['volume']
+        print(environment)
         return data
+
+@app.route('/backHome', methods=['POST'])
+def backHome():
+    global state, destLoc
+    state = "MAID"
+    destLoc = "Door"
+    print(state)
+    return state
 
 @app.route('/getCurrentLoc', methods=['GET'])
 def getCurrentLoc():
