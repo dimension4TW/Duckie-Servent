@@ -9,14 +9,11 @@
 <body>
     <div class="container" >
       <div class="row">
-        <div class="col col-md-4 offset-md-4 cardtext-center" style="width: 20rem; ">
-          <img class="card-img-top" src="http://duckietown.org/media/duckie2.png">
-          <div class="card-body">
-            <h4 class="card-title">Dockie Lolita</h4>
-            <p class="card-text">Current State: {{ state }}</p>
-            <p class="card-text" id="currentLoc">Current Location: {{ location }}</p>
-            <p class="card-text">Current Destination: {{ destination }}</p>
-          </div>
+        <div class="col cardtext-center" style="width: 20rem; ">
+          <!--<img class="card-img-top" src="http://duckietown.org/media/duckie2.png">-->
+            <p class="h1" style="color:red;">{{ state }}</p>
+            <p class="h1" id="currentLoc">Now at: {{ location }}</p>
+            <p class="h1">Going to: {{ destination }}</p>
           <form action="/changeState" method="post">
             <input class="btn btn-warning btn-lg btn-block" type="submit" name="state" value="GUARD"/>
           </form>
@@ -40,9 +37,9 @@
 setInterval(function(){
   $.get('/getCurrentLoc', function(data, status){
           //console.log(data);
-          $('#currentLoc').text("Current Location: "+data);
+          $('#currentLoc').text("Now at: "+data);
       });
-}, 5000)
+}, 1000)
 </script>
 
 {% endblock %}

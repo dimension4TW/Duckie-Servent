@@ -236,6 +236,18 @@ def dashboard():
     global state, destLoc, currentLoc
     return render_template('dashboard.html', state=state, destination = destLoc,location=currentLoc)
 
+@app.route('/reset', methods=['GET'])
+def reset():
+    global previousLoc, currentLoc, nextLoc, destLoc, action, state
+    previousLoc = "Door"
+    currentLoc = "Room A"
+    nextLoc = "Room A"
+    destLoc = "Room A"
+    action = "STOP"
+    state = "VELVET"
+
+    return "RESET successful!"
+
 @app.route('/turn', methods=['GET'])
 def turn():
     global currentLoc, destLoc, nextLoc, previousLoc, state, action
@@ -256,7 +268,7 @@ def turn():
             elif currentLoc == "Room C":
                 destLoc = "Door"
             elif currentLoc == "Door":
-                destLoc = "Room A"        
+                destLoc = "Room A"
     nextLoc = getNextLoc(currentLoc, destLoc)
     print("NextLoc: ",nextLoc)
     action = getNextMove(previousLoc, currentLoc, nextLoc, destLoc)
