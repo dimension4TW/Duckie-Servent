@@ -279,14 +279,14 @@ def turn():
 def send_data():
     global environment
     if request.method == 'POST':
-        environment.lightness = request.form['light']
-        environment.temperature = request.form['temperature']
-        environment.humidity = request.form['humidity']
-        environment.volume = request.form['volume']
+        environment["lightness"] = request.form['light']
+        environment["temperature"] = request.form['temperature']
+        environment["humidity"] = request.form['humidity']
+        environment["volume"] = request.form['volume']
         print(environment)
-        return data
+        return "success!"
 
-@app.route('/backHome', methods=['POST'])
+@app.route('/backHome', methods=['GET'])
 def backHome():
     global state, destLoc
     state = "MAID"
@@ -304,6 +304,12 @@ def getCurrentLoc():
 def getState():
     print(state)
     return state
+
+@app.route('/getDest', methods=['GET'])
+def getDest():
+    global destLoc
+    #print(currentLoc)
+    return destLoc
 
 @app.route('/changeState', methods=['POST'])
 def changeState():
