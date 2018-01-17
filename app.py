@@ -27,9 +27,9 @@ environmentC = {
 }
 
 previousLoc = "Z"
-currentLoc = "Room C"
-nextLoc = "Room C"
-destLoc = "Room C"
+currentLoc = "Room B"
+nextLoc = "Room B"
+destLoc = "Room B"
 action = "STOP"
 #currentPath = deque(["A","B","C"])
 
@@ -254,9 +254,9 @@ def dashboard():
 def reset():
     global previousLoc, currentLoc, nextLoc, destLoc, action, state
     previousLoc = "Z"
-    currentLoc = "Room C"
-    nextLoc = "Room C"
-    destLoc = "Room C"
+    currentLoc = "Room B"
+    nextLoc = "Room B"
+    destLoc = "Room B"
     action = "STOP"
     state = "VELVET"
 
