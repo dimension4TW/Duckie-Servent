@@ -1,11 +1,25 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from collections import deque
 
 app = Flask(__name__)
 
 state = "VELVET"
 location = "Leave Home"
-environment = {
+environmentA = {
+    "lightness": 0.0,
+    "temperature":0.0,
+    "humidity":0.0,
+    "volume":0.0
+}
+
+environmentB = {
+    "lightness": 0.0,
+    "temperature":0.0,
+    "humidity":0.0,
+    "volume":0.0
+}
+
+environmentC = {
     "lightness": 0.0,
     "temperature":0.0,
     "humidity":0.0,
@@ -273,17 +287,30 @@ def turn():
     print("NextLoc: ",nextLoc)
     action = getNextMove(previousLoc, currentLoc, nextLoc, destLoc)
     print("From ",previousLoc," Action:",action," Current Location:",currentLoc," Next Location:",nextLoc)
-    return action
+    data = {"action":action, "current":currentLoc}
+
+
+    return jsonify(data)
 
 @app.route('/sendData', methods=['POST'])
 def send_data():
-    global environment
+    global environmentA,environmentB,environmentC,currentLoc
     if request.method == 'POST':
-        environment["lightness"] = request.form['light']
-        environment["temperature"] = request.form['temperature']
-        environment["humidity"] = request.form['humidity']
-        environment["volume"] = request.form['volume']
-        print(environment)
+        if currentLoc == "Room A":
+            environmentA["lightness"] = request.form['light']
+            environmentA["temperature"] = request.form['temperature']
+            environmentA["humidity"] = request.form['humidity']
+            environmentA["volume"] = request.form['volume']
+        elif currentLoc == "Room B":
+            environmentB["lightness"] = request.form['light']
+            environmentB["temperature"] = request.form['temperature']
+            environmentB["humidity"] = request.form['humidity']
+            environmentB["volume"] = request.form['volume']
+        elif currentLoc == "Room C":
+            environmentC["lightness"] = request.form['light']
+            environmentC["temperature"] = request.form['temperature']
+            environmentC["humidity"] = request.form['humidity']
+            environmentC["volume"] = request.form['volume']
         return "success!"
 
 @app.route('/backHome', methods=['GET'])
@@ -291,25 +318,15 @@ def backHome():
     global state, destLoc
     state = "MAID"
     destLoc = "Door"
-    print(state)
+    print("Enter "+state)
     return state
 
-@app.route('/getCurrentLoc', methods=['GET'])
-def getCurrentLoc():
-    global currentLoc
-    #print(currentLoc)
-    return currentLoc
+@app.route('/getStatus',methods=['GET'])
+def getStatus():
+    global currentLoc, state, destLoc
+    status = {"currentLoc":currentLoc, "currentState": state, "currentDest": destLoc}
+    return jsonify(status)
 
-@app.route('/getState', methods=['GET'])
-def getState():
-    print(state)
-    return state
-
-@app.route('/getDest', methods=['GET'])
-def getDest():
-    global destLoc
-    #print(currentLoc)
-    return destLoc
 
 @app.route('/changeState', methods=['POST'])
 def changeState():
@@ -320,15 +337,21 @@ def changeState():
 
 @app.route('/changeDestination', methods=['POST'])
 def changeDestination():
-    global destLoc, currentLoc
+    global destLoc, currentLoc, state
     destLoc = request.form['location']
     state = "VELVET"
     #updateState()
     print("currentLoc: ",currentLoc, " destLoc: ",destLoc)
     return render_template('dashboard.html', state=state, destination = destLoc,location=currentLoc)
 
-@app.route('/display', methods=['GET'])
+@app.route('/getData', methods=['GET'])
 def getData():
-    global environment
-    print(environment)
-    return render_template('display.html', environment = environment)
+    global environmentA, environmentB, environmentC
+    data = {"environmentA":environmentA, "environmentB":environmentB, "environmentC": environmentC}
+    return jsonify(data)
+
+@app.route('/display', methods=['GET'])
+def display():
+    global environmentA, environmentB, environmentC
+    #print(environment)
+    return render_template('display.html', environmentA = environmentA, environmentB=environmentB, environmentC=environmentC)

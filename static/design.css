@@ -1,0 +1,35 @@
+body {
+  background-color:	#EEE8AA;
+  font-size: 62.5%;
+}
+h1, thead,tr{
+  color:#000;
+  text-align: center;
+  padding: 20px;
+}
+.title {
+
+  font-weight: bolder;
+  font-size: 40px;
+  text-align: center;
+  line-height: 1.4;
+  color: #00008B;
+}
+.duckie{
+   width: 20%;
+   position: relative;
+   left:  40%;
+}
+.container {
+  width: 80%;
+  margin: 20px auto;
+}
+.chart {
+  width: 70%;
+  margin: 20px auto;
+}
+.backdash {
+  color:#000;
+  text-align: center;
+  padding: 20px;
+}

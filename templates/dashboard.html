@@ -36,18 +36,13 @@
 <script>
 
 setInterval(function(){
-  $.get('/getCurrentLoc', function(data, status){
+  $.get('/getStatus', function(data){
           //console.log(data);
-          $('#currentLoc').text("Now at: "+data);
+          $('#currentLoc').text("Now at: "+data.currentLoc);
+          $('#currentState').text(data.currentState);
+          $('#currentDest').text("Going to: "+data.currentDest);
       });
-  $.get('/getState', function(data, status){
-          //console.log(data);
-          $('#currentState').text(data);
-      });
-  $.get('/getDest', function(data, status){
-          //console.log(data);
-          $('#currentDest').text(data);
-      });
+
 }, 1000)
 
 </script>

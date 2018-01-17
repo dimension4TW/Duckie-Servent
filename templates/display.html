@@ -1,6 +1,10 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css">
-<link rel="stylesheet" href="css/design.css">
+<link rel="stylesheet" href="static/design.css">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+<script src="static/chart.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 
 <h1 class="title">Room's Environment</h1>
 
@@ -17,7 +21,7 @@
   </div>
 
  </div>
-
+    Room A
     <table class="table">
     <thead>
       <tr>
@@ -28,22 +32,78 @@
     <tbody>
       <tr>
         <th scope="row">Lightness</th>
-        <td>{{environment.lightness}}</td>
+        <td id="lightA">{{environmentA.lightness}}</td>
       </tr>
       <tr>
         <th scope="row">Temperature</th>
-        <td>{{environment.temperature}}</td>
+        <td id=temperatureA>{{environmentA.temperature}}</td>
       </tr>
       <tr>
         <th scope="row">Humidity</th>
-        <td>{{environment.humidity}}</td>
+        <td id="humidityA">{{environmentA.humidity}}</td>
       </tr>
       <tr>
         <th scope="row">Volume</th>
-        <td>{{environment.volume}}</td>
+        <td id="volumeA">{{environmentA.volume}}</td>
       </tr>
     </tbody>
   </table>
+
+  Room B
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Data Type</th>
+      <th scope="col">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Lightness</th>
+      <td id="lightB">{{environmentB.lightness}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Temperature</th>
+      <td id=temperatureB>{{environmentB.temperature}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Humidity</th>
+      <td id="humidityB">{{environmentB.humidity}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Volume</th>
+      <td id="volumeB">{{environmentB.volume}}</td>
+    </tr>
+  </tbody>
+</table>
+
+Room C
+<table class="table">
+<thead>
+  <tr>
+    <th scope="col">Data Type</th>
+    <th scope="col">Value</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <th scope="row">Lightness</th>
+    <td id="lightC">{{environmentC.lightness}}</td>
+  </tr>
+  <tr>
+    <th scope="row">Temperature</th>
+    <td id=temperatureC>{{environmentC.temperature}}</td>
+  </tr>
+  <tr>
+    <th scope="row">Humidity</th>
+    <td id="humidityC">{{environmentC.humidity}}</td>
+  </tr>
+  <tr>
+    <th scope="row">Volume</th>
+    <td id="volumeC">{{environmentC.volume}}</td>
+  </tr>
+</tbody>
+</table>
 
   <div class="row">
        <div class="col-sm-6">
@@ -68,10 +128,9 @@
        <div class="col-sm-6">
          <div class="chart">
           <h2>My House</h2>
-              <img class="card-img-top" src="image/map.png">
+              <img class="card-img-top" src="static/map.png">
          </div>
        </div>
-
 
        <div class="col-sm-6">
          <div class="chart">
@@ -82,29 +141,44 @@
          </div>
        </div>
   </div>
-
-
-
-
-
 </div>
 
 
   <a href="http://www.sitepoint.com/fancy-responsive-charts-with-chart-js" target="_blank"></a>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="scripts/chart.js"></script>
-
-
-
   <div class="backdash">
     <a href="/"> back to dashboard -></a>
   </div>
 
 
-
-
 </body>
 
 </html>
+
+<script>
+
+setInterval(function(){
+  $.get('/getData', function(data){
+          //console.log(data);
+          $('#lightA').text(data.environmentA.lightness);
+          $('#temperatureA').text(data.environmentA.temperature);
+          $('#humidityA').text(data.environmentA.humidity);
+          $('#volumeA').text(data.environmentA.volume);
+
+          $('#lightB').text(data.environmentB.lightness);
+          $('#temperatureB').text(data.environmentB.temperature);
+          $('#humidityB').text(data.environmentB.humidity);
+          $('#volumeB').text(data.environmentB.volume);
+
+          $('#lightC').text(data.environmentC.lightness);
+          $('#temperatureC').text(data.environmentC.temperature);
+          $('#humidityC').text(data.environmentC.humidity);
+          $('#volumeC').text(data.environmentC.volume);
+
+
+      });
+
+}, 1000)
+
+</script>
+
 {% endblock %}
