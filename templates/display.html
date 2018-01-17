@@ -25,35 +25,12 @@
   </div>
 
  </div>
-    Room A
-    <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Data Type</th>
-        <th scope="col">Value</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">Lightness</th>
-        <td id="lightA">{{environmentA.lightness}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Temperature</th>
-        <td id=temperatureA>{{environmentA.temperature}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Humidity</th>
-        <td id="humidityA">{{environmentA.humidity}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Volume</th>
-        <td id="volumeA">{{environmentA.volume}}</td>
-      </tr>
-    </tbody>
-  </table>
 
-  Room B
+
+ <div class="tabs">
+<input type="radio" name="tabs" id="tabone" checked="checked">
+<label for="tabone">Room A</label>
+<div class="tab">
   <table class="table">
   <thead>
     <tr>
@@ -64,50 +41,100 @@
   <tbody>
     <tr>
       <th scope="row">Lightness</th>
-      <td id="lightB">{{environmentB.lightness}}</td>
+      <td id="lightA">{{environmentA.lightness}}</td>
     </tr>
     <tr>
       <th scope="row">Temperature</th>
-      <td id=temperatureB>{{environmentB.temperature}}</td>
+      <td id=temperatureA>{{environmentA.temperature}}</td>
     </tr>
     <tr>
       <th scope="row">Humidity</th>
-      <td id="humidityB">{{environmentB.humidity}}</td>
+      <td id="humidityA">{{environmentA.humidity}}</td>
     </tr>
     <tr>
       <th scope="row">Volume</th>
-      <td id="volumeB">{{environmentB.volume}}</td>
+      <td id="volumeA">{{environmentA.volume}}</td>
     </tr>
   </tbody>
 </table>
+</div>
 
-Room C
-<table class="table">
-<thead>
-  <tr>
-    <th scope="col">Data Type</th>
-    <th scope="col">Value</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <th scope="row">Lightness</th>
-    <td id="lightC">{{environmentC.lightness}}</td>
-  </tr>
-  <tr>
-    <th scope="row">Temperature</th>
-    <td id=temperatureC>{{environmentC.temperature}}</td>
-  </tr>
-  <tr>
-    <th scope="row">Humidity</th>
-    <td id="humidityC">{{environmentC.humidity}}</td>
-  </tr>
-  <tr>
-    <th scope="row">Volume</th>
-    <td id="volumeC">{{environmentC.volume}}</td>
-  </tr>
-</tbody>
+<input type="radio" name="tabs" id="tabtwo">
+<label for="tabtwo">Room B</label>
+<div class="tab">
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Data Type</th>
+      <th scope="col">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Lightness</th>
+      <td id="lightA">{{environmentB.lightness}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Temperature</th>
+      <td id=temperatureA>{{environmentB.temperature}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Humidity</th>
+      <td id="humidityA">{{environmentB.humidity}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Volume</th>
+      <td id="volumeA">{{environmentB.volume}}</td>
+    </tr>
+  </tbody>
 </table>
+</div>
+
+<input type="radio" name="tabs" id="tabthree">
+<label for="tabthree">Room C</label>
+<div class="tab">
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Data Type</th>
+      <th scope="col">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Lightness</th>
+      <td id="lightA">{{environmentC.lightness}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Temperature</th>
+      <td id=temperatureA>{{environmentC.temperature}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Humidity</th>
+      <td id="humidityA">{{environmentC.humidity}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Volume</th>
+      <td id="volumeA">{{environmentC.volume}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   <div class="row">
        <div class="col-sm-6">
@@ -141,7 +168,7 @@ Room C
           <h2>Duckie's Location</h2>
                <h3> Room A </h3>
           <h2>Duckie's Situation</h2>
-               <h3> Danger ! </h3>
+               <h3> You forget to turn off light !  </h3>
          </div>
        </div>
   </div>
