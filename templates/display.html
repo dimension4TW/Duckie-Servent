@@ -45,7 +45,7 @@
     </tr>
     <tr>
       <th scope="row">Temperature</th>
-      <td id=temperatureA>{{environmentA.temperature}}</td>
+      <td id="temperatureA">{{environmentA.temperature}}</td>
     </tr>
     <tr>
       <th scope="row">Humidity</th>
@@ -72,19 +72,19 @@
   <tbody>
     <tr>
       <th scope="row">Lightness</th>
-      <td id="lightA">{{environmentB.lightness}}</td>
+      <td id="lightB">{{environmentB.lightness}}</td>
     </tr>
     <tr>
       <th scope="row">Temperature</th>
-      <td id=temperatureA>{{environmentB.temperature}}</td>
+      <td id="temperatureB">{{environmentB.temperature}}</td>
     </tr>
     <tr>
       <th scope="row">Humidity</th>
-      <td id="humidityA">{{environmentB.humidity}}</td>
+      <td id="humidityB">{{environmentB.humidity}}</td>
     </tr>
     <tr>
       <th scope="row">Volume</th>
-      <td id="volumeA">{{environmentB.volume}}</td>
+      <td id="volumeB">{{environmentB.volume}}</td>
     </tr>
   </tbody>
 </table>
@@ -103,19 +103,19 @@
   <tbody>
     <tr>
       <th scope="row">Lightness</th>
-      <td id="lightA">{{environmentC.lightness}}</td>
+      <td id="lightC">{{environmentC.lightness}}</td>
     </tr>
     <tr>
       <th scope="row">Temperature</th>
-      <td id=temperatureA>{{environmentC.temperature}}</td>
+      <td id="temperatureC">{{environmentC.temperature}}</td>
     </tr>
     <tr>
       <th scope="row">Humidity</th>
-      <td id="humidityA">{{environmentC.humidity}}</td>
+      <td id="humidityC">{{environmentC.humidity}}</td>
     </tr>
     <tr>
       <th scope="row">Volume</th>
-      <td id="volumeA">{{environmentC.volume}}</td>
+      <td id="volumeC">{{environmentC.volume}}</td>
     </tr>
   </tbody>
 </table>
@@ -176,6 +176,8 @@
 setInterval(function(){
   $.get('/getData', function(data){
           //console.log(data);
+		  //Room A
+		  $('#lightA').text(data.environmentA.lightness);
           if(data.environmentA.lightness <50){
             $('#lightA').text(data.environmentA.lightness).css('color', 'red');
             $('#light-warning').show();
@@ -189,11 +191,28 @@ setInterval(function(){
           $('#volumeA').text(data.environmentA.volume);
 
           $('#lightB').text(data.environmentB.lightness);
+		  if(data.environmentB.lightness <50){
+            $('#lightB').text(data.environmentB.lightness).css('color', 'red');
+            $('#light-warning').show();
+          }
+          else{
+            $('#lightB').text(data.environmentB.lightness).css('color', 'black');
+            $('#light-warning').hide();
+          }
           $('#temperatureB').text(data.environmentB.temperature);
           $('#humidityB').text(data.environmentB.humidity);
           $('#volumeB').text(data.environmentB.volume);
 
+		  
           $('#lightC').text(data.environmentC.lightness);
+		  if(data.environmentB.lightness <50){
+            $('#lightC').text(data.environmentB.lightness).css('color', 'red');
+            $('#light-warning').show();
+          }
+          else{
+            $('#lightC').text(data.environmentB.lightness).css('color', 'black');
+            $('#light-warning').hide();
+          }
           $('#temperatureC').text(data.environmentC.temperature);
           $('#humidityC').text(data.environmentC.humidity);
           $('#volumeC').text(data.environmentC.volume);
