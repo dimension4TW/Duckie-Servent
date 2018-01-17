@@ -26,10 +26,10 @@ environmentC = {
     "volume":0.0
 }
 
-previousLoc = "Door"
-currentLoc = "Room A"
-nextLoc = "Room A"
-destLoc = "Room A"
+previousLoc = "Z"
+currentLoc = "Room C"
+nextLoc = "Room C"
+destLoc = "Room C"
 action = "STOP"
 #currentPath = deque(["A","B","C"])
 
@@ -253,10 +253,10 @@ def dashboard():
 @app.route('/reset', methods=['GET'])
 def reset():
     global previousLoc, currentLoc, nextLoc, destLoc, action, state
-    previousLoc = "Door"
-    currentLoc = "Room A"
-    nextLoc = "Room A"
-    destLoc = "Room A"
+    previousLoc = "Z"
+    currentLoc = "Room C"
+    nextLoc = "Room C"
+    destLoc = "Room C"
     action = "STOP"
     state = "VELVET"
 
