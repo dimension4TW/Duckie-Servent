@@ -151,10 +151,10 @@
 
        <div class="col-sm-6">
          <div class="chart">
-          
-          
-            <h3 id="light-warning" style="color:red;"> </h3>
-			
+
+
+            <h3 style="display:inline; color: red" id="light-warning">The light is turned in: </h3><h3 id="RA"style="color:red;">Room A </h3><h3 id="RB"style="color:red;">Room B </h3><h3 id="RC"style="color:red;">Room C</h3>
+
          </div>
        </div>
   </div>
@@ -172,63 +172,61 @@
 </html>
 
 <script>
-var warning = document.getElementById("light-warning");
-element.innerHTML = "New Heading";
+var element = document.getElementById("light-warning");
 setInterval(function(){
   $.get('/getData', function(data){
           //console.log(data);
 		  //Room A
 		  $('#lightA').text(data.environmentA.lightness);
           if(data.environmentA.lightness <50){
-		    element.innerHTML = "Room A ";
             $('#lightA').text(data.environmentA.lightness).css('color', 'red');
-            //$('#light-warning').text(" Warning ! Room A forget to turn off the light!");
+            $('#RA').show();
           }
           else{
             $('#lightA').text(data.environmentA.lightness).css('color', 'black');
-            $('#light-warning').hide();
+            $('#RA').hide();
           }
           $('#temperatureA').text(data.environmentA.temperature);
           $('#humidityA').text(data.environmentA.humidity);
           $('#volumeA').text(data.environmentA.volume);
-
-		  
-		  
-		  
           $('#lightB').text(data.environmentB.lightness);
 		  if(data.environmentB.lightness <50){
-		    element.innerHTML = "Room B ";
             $('#lightB').text(data.environmentB.lightness).css('color', 'red');
-            
+              $('#RB').show();
+
             //$('#light-warning').text(" Warning ! Room B forget to turn off the light!");
           }
           else{
-            $('#lightB').text(data.environmentB.lightness).css('color', 'black');
-            $('#light-warning').hide();
+              $('#lightB').text(data.environmentB.lightness).css('color', 'black');
+              $('#RB').hide();
+
           }
           $('#temperatureB').text(data.environmentB.temperature);
           $('#humidityB').text(data.environmentB.humidity);
           $('#volumeB').text(data.environmentB.volume);
 
-		  
+
           $('#lightC').text(data.environmentC.lightness);
 		  if(data.environmentB.lightness <50){
-		  element.innerHTML = "Room C ";
             $('#lightC').text(data.environmentC.lightness).css('color', 'red');
+            $('#RC').show();
             //$('#light-warning').text("Warning ! Room C forget to turn off the light!");
           }
           else{
             $('#lightC').text(data.environmentC.lightness).css('color', 'black');
-            $('#light-warning').hide();
+              $('#RC').hide();
           }
           $('#temperatureC').text(data.environmentC.temperature);
           $('#humidityC').text(data.environmentC.humidity);
           $('#volumeC').text(data.environmentC.volume);
-		  
-		  
-		  if(data.environmentA.lightness <50 || data.environmentB.lightness <50 || data.environmentC.lightness <50 )
-		     element.innerHTML = "Forget to turn off the light!";
-		  
+
+
+		  if(data.environmentA.lightness <50 || data.environmentB.lightness <50 || data.environmentC.lightness <50 ){
+		     $('#light-warning').show();
+      }
+      else{
+        $('#light-warning').hide();
+      }
 
       });
 
