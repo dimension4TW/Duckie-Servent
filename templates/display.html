@@ -1,11 +1,23 @@
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css">
+<link rel="stylesheet" href="css/design.css">
 
-{% block content%}
+<h1 class="title">Room's Environment</h1>
+
+<!{% block content%}>
 <html lang="en">
-<div class="container">
 <body>
+<div class="container">
+  <div class="row">
+
+   <div class="col cardtext-center">
+     <div class="duckie">
+         <img class="card-img-top" src="http://duckietown.org/media/duckie2.png">
+     </div>
+  </div>
+
+ </div>
+
     <table class="table">
     <thead>
       <tr>
@@ -32,9 +44,67 @@
       </tr>
     </tbody>
   </table>
-  <a href="/"> back to dashboard -></a>
+
+  <div class="row">
+       <div class="col-sm-6">
+         <div class="chart">
+          <h2>Temperature</h2>
+             <div>
+                 <canvas id="canvas" width="80px" height="60px"></canvas>
+             </div>
+         </div>
+       </div>
+
+       <div class="col-sm-6">
+         <div class="chart">
+          <h2>Humidity</h2>
+             <div>
+                <canvas id="canvas2" width="80px" height="60px"></canvas>
+             </div>
+         </div>
+       </div>
+
+
+       <div class="col-sm-6">
+         <div class="chart">
+          <h2>My House</h2>
+              <img class="card-img-top" src="image/map.png">
+         </div>
+       </div>
+
+
+       <div class="col-sm-6">
+         <div class="chart">
+          <h2>Duckie's Location</h2>
+               <h3> Room A </h3>
+          <h2>Duckie's Situation</h2>
+               <h3> Danger ! </h3>
+         </div>
+       </div>
+  </div>
+
+
+
+
 
 </div>
+
+
+  <a href="http://www.sitepoint.com/fancy-responsive-charts-with-chart-js" target="_blank"></a>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="scripts/chart.js"></script>
+
+
+
+  <div class="backdash">
+    <a href="/"> back to dashboard -></a>
+  </div>
+
+
+
+
 </body>
+
 </html>
 {% endblock %}
