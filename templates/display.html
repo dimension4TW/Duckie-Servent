@@ -122,20 +122,6 @@
 </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <div class="row">
        <div class="col-sm-6">
          <div class="chart">
@@ -165,10 +151,10 @@
 
        <div class="col-sm-6">
          <div class="chart">
-          <h2>Duckie's Location</h2>
+          <h3>Duckie's Location</h3>
                <h3> Room A </h3>
-          <h2>Duckie's Situation</h2>
-               <h3> You forget to turn off light !  </h3>
+          <h3>Duckie's Situation</h3>
+               <h3 id="light-warning" style="color:red;"> You forget to turn off the light!</h3>
          </div>
        </div>
   </div>
@@ -190,7 +176,14 @@
 setInterval(function(){
   $.get('/getData', function(data){
           //console.log(data);
-          $('#lightA').text(data.environmentA.lightness);
+          if(data.environmentA.lightness <50){
+            $('#lightA').text(data.environmentA.lightness).css('color', 'red');
+            $('#light-warning').show();
+          }
+          else{
+            $('#lightA').text(data.environmentA.lightness).css('color', 'black');
+            $('#light-warning').hide();
+          }
           $('#temperatureA').text(data.environmentA.temperature);
           $('#humidityA').text(data.environmentA.humidity);
           $('#volumeA').text(data.environmentA.volume);
@@ -204,7 +197,6 @@ setInterval(function(){
           $('#temperatureC').text(data.environmentC.temperature);
           $('#humidityC').text(data.environmentC.humidity);
           $('#volumeC').text(data.environmentC.volume);
-
 
       });
 
