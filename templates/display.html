@@ -151,10 +151,9 @@
 
        <div class="col-sm-6">
          <div class="chart">
-          <h3>Duckie's Location</h3>
-               <h3> Room A </h3>
-          <h3>Duckie's Situation</h3>
-               <h3 id="light-warning" style="color:red;"> You forget to turn off the light!</h3>
+          
+          
+           <h3 id="light-warning" style="color:red;"> </h3>
          </div>
        </div>
   </div>
@@ -180,7 +179,7 @@ setInterval(function(){
 		  $('#lightA').text(data.environmentA.lightness);
           if(data.environmentA.lightness <50){
             $('#lightA').text(data.environmentA.lightness).css('color', 'red');
-            $('#light-warning').show();
+            $('#light-warning').text(" Warning ! Room A forget to turn off the light!");
           }
           else{
             $('#lightA').text(data.environmentA.lightness).css('color', 'black');
@@ -193,7 +192,8 @@ setInterval(function(){
           $('#lightB').text(data.environmentB.lightness);
 		  if(data.environmentB.lightness <50){
             $('#lightB').text(data.environmentB.lightness).css('color', 'red');
-            $('#light-warning').show();
+            
+            $('#light-warning').text(" Warning ! Room B forget to turn off the light!");
           }
           else{
             $('#lightB').text(data.environmentB.lightness).css('color', 'black');
@@ -206,11 +206,11 @@ setInterval(function(){
 		  
           $('#lightC').text(data.environmentC.lightness);
 		  if(data.environmentB.lightness <50){
-            $('#lightC').text(data.environmentB.lightness).css('color', 'red');
-            $('#light-warning').show();
+            $('#lightC').text(data.environmentC.lightness).css('color', 'red');
+            $('#light-warning').text("Warning ! Room C forget to turn off the light!");
           }
           else{
-            $('#lightC').text(data.environmentB.lightness).css('color', 'black');
+            $('#lightC').text(data.environmentC.lightness).css('color', 'black');
             $('#light-warning').hide();
           }
           $('#temperatureC').text(data.environmentC.temperature);
