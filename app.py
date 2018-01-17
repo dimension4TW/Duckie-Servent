@@ -123,9 +123,9 @@ def getNextMove(pre,cur,nxt,dest):
         return "STOP"
     elif(cur =="Room A"):
         if(pre == "Z" and nxt == "Door"):
-            return "STRAIGHT"
+            return "PASS"
         elif(pre == "Door" and nxt == "Z"):
-            return "STRAIGHT"
+            return "PASS"
         elif(pre == "Door" and nxt == "Door"):
             return "INVERSE"
         elif(pre == "Z" and nxt == "Z"):
@@ -133,9 +133,9 @@ def getNextMove(pre,cur,nxt,dest):
 
     elif(cur =="Room B"):
         if(pre == "X" and nxt == "Z"):
-            return "STRAIGHT"
+            return "PASS"
         elif(pre == "Z" and nxt == "X"):
-            return "STRAIGHT"
+            return "PASS"
         elif(pre == "X" and nxt == "X"):
             return "INVERSE"
         elif(pre == "Z" and nxt == "Z"):
@@ -143,9 +143,9 @@ def getNextMove(pre,cur,nxt,dest):
 
     elif(cur =="Room C"):
         if(pre == "X" and nxt == "Door"):
-            return "STRAIGHT"
+            return "PASS"
         elif(pre == "Door" and nxt == "X"):
-            return "STRAIGHT"
+            return "PASS"
         elif(pre == "X" and nxt == "X"):
             return "INVERSE"
         elif(pre == "Door" and nxt == "Door"):
