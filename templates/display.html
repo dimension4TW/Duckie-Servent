@@ -206,7 +206,7 @@ setInterval(function(){
 
 
           $('#lightC').text(data.environmentC.lightness);
-		  if(data.environmentB.lightness <50){
+		  if(data.environmentC.lightness <50){
             $('#lightC').text(data.environmentC.lightness).css('color', 'red');
             $('#RC').show();
             //$('#light-warning').text("Warning ! Room C forget to turn off the light!");
